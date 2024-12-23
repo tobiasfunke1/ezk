@@ -12,6 +12,7 @@ use std::time::Duration;
 use tokio::time::sleep;
 
 /// Custom layer which we use to accept incoming invites
+#[derive(Debug)]
 struct InviteAcceptLayer {
     dialog_layer: LayerKey<DialogLayer>,
     invite_layer: LayerKey<InviteLayer>,

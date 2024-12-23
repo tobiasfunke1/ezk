@@ -133,7 +133,7 @@ impl IncomingRequest {
 /// They can be added to the endpoint in the building stage bay calling
 /// [`EndpointBuilder::add_layer`], and later be accessed via [`LayerKey`]s.
 #[async_trait::async_trait]
-pub trait Layer: Downcast + Send + Sync + 'static {
+pub trait Layer: Downcast + fmt::Debug + Send + Sync + 'static {
     /// Return a descriptive and unique name of the layer
     fn name(&self) -> &'static str;
 

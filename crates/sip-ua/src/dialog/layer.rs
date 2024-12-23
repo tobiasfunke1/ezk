@@ -6,16 +6,18 @@ use slotmap::{DefaultKey, SlotMap};
 use std::cmp::Ordering;
 use std::collections::BTreeMap;
 use std::collections::HashMap;
+use std::fmt::Debug;
 use std::sync::Arc;
 use tracing::{info_span, Instrument};
 
 #[async_trait::async_trait]
-pub trait Usage: Send + Sync + 'static {
+pub trait Usage: Debug + Send + Sync + 'static {
     fn name(&self) -> &'static str;
 
     async fn receive(&self, endpoint: &Endpoint, request: MayTake<'_, IncomingRequest>);
 }
 
+#[derive(Debug)]
 pub(super) struct DialogEntry {
     backlog: BTreeMap<u32, IncomingRequest>,
     next_peer_cseq: Option<u32>,
@@ -32,7 +34,7 @@ impl DialogEntry {
     }
 }
 
-#[derive(Default)]
+#[derive(Default, Debug)]
 pub struct DialogLayer {
     pub(super) dialogs: Mutex<HashMap<DialogKey, DialogEntry>>,
 }

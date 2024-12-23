@@ -117,7 +117,7 @@ impl InviteSessionState {
     }
 }
 
-#[derive(Default)]
+#[derive(Default, Debug)]
 pub struct InviteLayer {
     cancellables: pl::Mutex<HashMap<CancellableKey, Arc<Inner>>>,
 }
@@ -202,6 +202,7 @@ impl InviteLayer {
     }
 }
 
+#[derive(Debug)]
 struct InviteUsage {
     inner: Arc<Inner>,
 }
